@@ -69,14 +69,22 @@ def convert_to_ascii(image):
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        sys.stderr.write("Usage: python asciify.py <path-to-image>")
+        sys.stderr.write("Usage: python asciify.py <path-to-image> [terminal-width]")
         sys.exit(1)
+
+    terminal_width = 80
+    if len(sys.argv) == 3:
+        try:
+            terminal_width = int(sys.argv[2])
+        except ValueError:
+            sys.stderr.write('Incorrect terminal width passed, defaulting to 80')
+
 
     #open the image specified on the command line
     image = Image.open(sys.argv[1])
     #first convert the image to greyscale
     image = convert_to_grayscale(image)
     #then resize it so that it'll fit on a terminal
-    image = resize_for_terminal(image, 80)
+    image = resize_for_terminal(image, terminal_width)
     #print the string after conversion
     print(convert_to_ascii(image))
