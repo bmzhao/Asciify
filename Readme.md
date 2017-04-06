@@ -1,4 +1,4 @@
-#Asciify
+# Asciify
 
 A python script that converts an image to an ascii string, and prints it to the terminal. 
 
